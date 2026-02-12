@@ -6,6 +6,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a **Minimalist CV/Resume web application** built with Next.js 14, React, TypeScript, and Tailwind CSS. The app renders a clean, print-friendly CV layout with data configured in a single file.
 
+**Prerequisites:**
+- Node.js 18+
+- pnpm 8+
+
 ## Commands
 
 ### Development
@@ -51,20 +55,29 @@ docker compose down      # Stop the container
 ### Important Files
 - **`src/data/resume-data.tsx`** - Main configuration file containing all CV data (personal info, work experience, education, skills, projects)
 - **`src/app/page.tsx`** - Main resume page component that renders the CV
+- **`src/app/components/`** - Section components (Header, Summary, WorkExperience, Education, Skills, Projects)
 - **`src/app/layout.tsx`** - Root layout with metadata and analytics
 - **`src/components/command-menu.tsx`** - Keyboard shortcuts (Cmd+K) for navigation
-- **`src/components/print-drawer.tsx`** - Print functionality component
+- **`src/apollo/`** - GraphQL server configuration using type-graphql with decorators
+- **`biome.json`** - Biome configuration for linting and formatting rules
+- **`tsconfig.json`** - TypeScript config with decorators enabled (required for GraphQL)
 
 ## Development Notes
+
+### TypeScript Configuration
+The project uses TypeScript with decorators enabled (`experimentalDecorators: true` and `emitDecoratorMetadata: true`), which is **required** for the type-graphql setup. Path aliases are configured: `@/*` maps to `./src/*`.
 
 ### Adding New Sections
 To add new sections to the CV, modify the `RESUME_DATA` object in `src/data/resume-data.tsx`. The layout automatically adjusts based on the data provided.
 
 ### GraphQL API
-The app exposes a GraphQL endpoint at `/graphql` that serves the resume data. This can be used to integrate the CV data with other applications.
+The app exposes a GraphQL endpoint at `/graphql` that serves the resume data using Apollo Server with type-graphql decorators. This can be used to integrate the CV data with other applications or query it programmatically.
+
+### Error Handling
+The app includes error boundaries (`error-boundary.tsx` and `section-error-boundary.tsx`) to gracefully handle component failures without breaking the entire page.
 
 ### Print Optimization
-The app includes special print styles to ensure the CV looks good when printed. Test print functionality when making layout changes.
+The app includes special print styles in `globals.css` to ensure the CV looks good when printed. Test print functionality (Cmd/Ctrl+P) when making layout changes.
 
 ### Deployment
-The app is optimized for Vercel deployment but can be deployed anywhere that supports Next.js applications. Docker support is included for containerized deployments.
+The app is optimized for Vercel deployment (current production: `luis.granadalabs.co` with Cloudflare DNS) but can be deployed anywhere that supports Next.js applications. Docker support is included for containerized deployments.

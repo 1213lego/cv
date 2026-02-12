@@ -1,6 +1,8 @@
 import type { StaticImageData } from "next/image";
 
-export type ResumeIcon = React.ComponentType<React.SVGProps<SVGSVGElement>> | StaticImageData;
+export type ResumeIcon =
+  | React.ComponentType<React.SVGProps<SVGSVGElement>>
+  | StaticImageData;
 
 export type IconType = "github" | "linkedin" | "x" | "globe" | "mail" | "phone";
 
@@ -38,6 +40,14 @@ export interface ResumeData {
     description: string | React.ReactNode;
   }>;
   skills: string[];
+  languages: Array<{
+    language: string;
+    proficiency: string;
+  }>;
+  hobbies: Array<{
+    title: string;
+    description: string;
+  }>;
   projects: Array<{
     title: string;
     techStack: string[];
@@ -90,6 +100,16 @@ export interface GraphQLProject {
   link?: GraphQLLink;
 }
 
+export interface GraphQLLanguage {
+  language: string;
+  proficiency: string;
+}
+
+export interface GraphQLHobby {
+  title: string;
+  description: string;
+}
+
 export interface GraphQLMe {
   name: string;
   initials: string;
@@ -103,6 +123,8 @@ export interface GraphQLMe {
   education: GraphQLEducation[];
   work: GraphQLWork[];
   skills: string[];
+  languages: GraphQLLanguage[];
+  hobbies: GraphQLHobby[];
   projects: GraphQLProject[];
 }
 
@@ -146,6 +168,8 @@ export function resumeDataToGraphQL(data: ResumeData): GraphQLMe {
       description: reactToString(job.description),
     })),
     skills: data.skills,
+    languages: data.languages,
+    hobbies: data.hobbies,
     projects: data.projects.map((project) => ({
       title: project.title,
       techStack: project.techStack,

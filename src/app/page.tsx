@@ -7,6 +7,8 @@ import { RESUME_DATA } from "@/data/resume-data";
 import { generateResumeStructuredData } from "@/lib/structured-data";
 import { Education } from "./components/Education";
 import { Header } from "./components/Header";
+import { Hobbies } from "./components/Hobbies";
+import { Languages } from "./components/Languages";
 import { Projects } from "./components/Projects";
 import { Skills } from "./components/Skills";
 import { Summary } from "./components/Summary";
@@ -111,6 +113,18 @@ export default function ResumePage() {
             <SectionErrorBoundary sectionName="Skills">
               <Suspense fallback={<SectionSkeleton lines={2} />}>
                 <Skills skills={RESUME_DATA.skills} />
+              </Suspense>
+            </SectionErrorBoundary>
+
+            <SectionErrorBoundary sectionName="Languages">
+              <Suspense fallback={<SectionSkeleton lines={1} />}>
+                <Languages languages={RESUME_DATA.languages} />
+              </Suspense>
+            </SectionErrorBoundary>
+
+            <SectionErrorBoundary sectionName="Hobbies">
+              <Suspense fallback={<SectionSkeleton lines={2} />}>
+                <Hobbies hobbies={RESUME_DATA.hobbies} />
               </Suspense>
             </SectionErrorBoundary>
 

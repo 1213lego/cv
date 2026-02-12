@@ -85,6 +85,24 @@ export class Project {
 }
 
 @ObjectType()
+export class Language {
+  @Field(() => String)
+  language: string;
+
+  @Field(() => String)
+  proficiency: string;
+}
+
+@ObjectType()
+export class Hobby {
+  @Field(() => String)
+  title: string;
+
+  @Field(() => String)
+  description: string;
+}
+
+@ObjectType()
 export class Me {
   @Field(() => String)
   name: string;
@@ -121,6 +139,12 @@ export class Me {
 
   @Field(() => [String])
   skills: string[];
+
+  @Field(() => [Language])
+  languages: Language[];
+
+  @Field(() => [Hobby])
+  hobbies: Hobby[];
 
   @Field(() => [Project])
   projects: Project[];

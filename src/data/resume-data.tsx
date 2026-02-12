@@ -12,14 +12,13 @@ export const RESUME_DATA: ResumeData = {
       systems, event-driven architectures, and AI-powered platforms. Hands-on
       with AI pipelines and LLM integrations across the full stack using
       TypeScript, Python, and Java in cloud environments (GCP, AWS).
-      <br /><br />
-      Fluent in English and Spanish (native). Ultra-endurance cyclist with
-      completed races across Australia and Indonesia. Full working rights in
-      Australia (Visa 485).
+      <br />
+      <br />
+      Full working rights in Australia (Visa 485).
     </>
   ),
   avatarUrl: "https://github.com/1213lego.png",
-  personalWebsiteUrl: "",
+  personalWebsiteUrl: "https://luis.granadalabs.co",
   contact: {
     email: "luisgranada1213@gmail.com",
     tel: "+61480452267",
@@ -76,8 +75,8 @@ export const RESUME_DATA: ResumeData = {
             </li>
             <li>
               Built event-driven AI pipelines using LLMs with Cloud Tasks and
-              Cloud Run. Tuned processing from 1.5–5 minutes to 6–30 seconds
-              per listing.
+              Cloud Run. Tuned processing from 1.5–5 minutes to 6–30 seconds per
+              listing.
             </li>
             <li>
               Built AI image generation feature producing 33,000+ lifestyle,
@@ -89,8 +88,8 @@ export const RESUME_DATA: ResumeData = {
               contextual, higher-quality results.
             </li>
             <li>
-              Developed prompt management tools enabling version control, testing,
-              and environment switching in seconds.
+              Developed prompt management tools enabling version control,
+              testing, and environment switching in seconds.
             </li>
           </ul>
         </>
@@ -113,8 +112,8 @@ export const RESUME_DATA: ResumeData = {
               feature flags and app version management.
             </li>
             <li>
-              Designed Server Driven UI approach enabling dynamic content delivery
-              without app releases.
+              Designed Server Driven UI approach enabling dynamic content
+              delivery without app releases.
             </li>
             <li>
               Implemented alert and distribution system for balanced customer
@@ -144,12 +143,12 @@ export const RESUME_DATA: ResumeData = {
               Python, PostgreSQL, and API design.
             </li>
             <li>
-              Guided students through coding challenges and projects from concept
-              to completion.
+              Guided students through coding challenges and projects from
+              concept to completion.
             </li>
             <li>
-              Assessed assignments with constructive feedback to enhance learning
-              outcomes.
+              Assessed assignments with constructive feedback to enhance
+              learning outcomes.
             </li>
           </ul>
         </>
@@ -164,7 +163,8 @@ export const RESUME_DATA: ResumeData = {
       end: "2022",
       description: (
         <>
-          Built medical prescription system for Mutual Ser (Colombian Health Insurance).
+          Built medical prescription system for Mutual Ser (Colombian Health
+          Insurance).
           <ul className="list-inside list-disc">
             <li>
               Owned initial phase: database model, microservices flow, and
@@ -206,8 +206,8 @@ export const RESUME_DATA: ResumeData = {
               months to 3.
             </li>
             <li>
-              Enhanced road inventory features across React UI and Play Framework
-              Java backend.
+              Enhanced road inventory features across React UI and Play
+              Framework Java backend.
             </li>
           </ul>
         </>
@@ -222,19 +222,17 @@ export const RESUME_DATA: ResumeData = {
       end: "2020",
       description: (
         <>
-          Contributed to government projects with Ministry of Labor requiring high
-          availability.
+          Contributed to government projects with Ministry of Labor requiring
+          high availability.
           <ul className="list-inside list-disc">
             <li>
               Migrated legacy Java services from Java 6 to 8 with Git version
               management.
             </li>
+            <li>Modernized build with Maven, reducing deploy times by 70%.</li>
             <li>
-              Modernized build with Maven, reducing deploy times by 70%.
-            </li>
-            <li>
-              Built citizen request portal features in Angular and Java, reducing
-              paper requests by 70%.
+              Built citizen request portal features in Angular and Java,
+              reducing paper requests by 70%.
             </li>
             <li>
               Conducted performance audits: sped up main dashboard by 15s, login
@@ -273,6 +271,17 @@ export const RESUME_DATA: ResumeData = {
     "Microservices",
     "BullMQ",
     "Socket.IO",
+  ],
+  languages: [
+    { language: "English", proficiency: "Fluent" },
+    { language: "Spanish", proficiency: "Native" },
+  ],
+  hobbies: [
+    {
+      title: "Ultra-Endurance Cycling",
+      description:
+        "Completed long-distance unsupported cycling races requiring careful planning, consistent execution, and resilience: Indian Pacific Wheel Ride (2024, cross-Australia race, 25 days) and Bentang Jawa (Aug 2025, 1,200 km across Indonesia, 5 days 7 hours)",
+    },
   ],
   projects: [
     {
