@@ -40,8 +40,9 @@ docker compose down      # Stop the container
 - **`/src/app/`** - Next.js App Router pages and layouts
 - **`/src/components/`** - Reusable UI components (using shadcn/ui)
 - **`/src/data/resume-data.tsx`** - Single configuration file for all CV content
+- **`/src/lib/`** - Shared utilities, TypeScript types, and structured data generators
 - **`/src/apollo/`** - GraphQL server setup with resolvers and type definitions
-- **`/src/images/logos/`** - Company logo components
+- **`/src/images/`** - Static assets and logo components
 
 ### Key Technologies
 - **Framework**: Next.js 14 with App Router
@@ -53,12 +54,16 @@ docker compose down      # Stop the container
 - **Print Optimization**: Custom print styles in global CSS
 
 ### Important Files
-- **`src/data/resume-data.tsx`** - Main configuration file containing all CV data (personal info, work experience, education, skills, projects)
+- **`src/data/resume-data.tsx`** - Main configuration file containing all CV data (personal info, work experience, education, skills, languages, hobbies, projects)
+- **`src/lib/types.ts`** - TypeScript type definitions for ResumeData and GraphQL types, plus conversion functions
+- **`src/lib/structured-data.ts`** - Generates JSON-LD structured data for SEO
 - **`src/app/page.tsx`** - Main resume page component that renders the CV
-- **`src/app/components/`** - Section components (Header, Summary, WorkExperience, Education, Skills, Projects)
+- **`src/app/components/`** - Section components (Header, Summary, WorkExperience, Education, Skills, Languages, Hobbies, Projects)
 - **`src/app/layout.tsx`** - Root layout with metadata and analytics
 - **`src/components/command-menu.tsx`** - Keyboard shortcuts (Cmd+K) for navigation
-- **`src/apollo/`** - GraphQL server configuration using type-graphql with decorators
+- **`src/components/section-error-boundary.tsx`** - Error boundary for graceful section failure handling
+- **`src/apollo/type-defs.ts`** - GraphQL ObjectType definitions using type-graphql decorators
+- **`src/apollo/resolvers.ts`** - GraphQL query resolvers
 - **`biome.json`** - Biome configuration for linting and formatting rules
 - **`tsconfig.json`** - TypeScript config with decorators enabled (required for GraphQL)
 
@@ -67,11 +72,42 @@ docker compose down      # Stop the container
 ### TypeScript Configuration
 The project uses TypeScript with decorators enabled (`experimentalDecorators: true` and `emitDecoratorMetadata: true`), which is **required** for the type-graphql setup. Path aliases are configured: `@/*` maps to `./src/*`.
 
-### Adding New Sections
-To add new sections to the CV, modify the `RESUME_DATA` object in `src/data/resume-data.tsx`. The layout automatically adjusts based on the data provided.
+### Adding New Sections to the CV
+
+To add a new section to the CV, follow these steps:
+
+1. **Update TypeScript types** (`src/lib/types.ts`):
+   - Add new field to `ResumeData` interface
+   - Add corresponding GraphQL-compatible interface (if needed)
+   - Update `resumeDataToGraphQL` conversion function
+
+2. **Add data** (`src/data/resume-data.tsx`):
+   - Add your new data field to the `RESUME_DATA` object
+
+3. **Create component** (`src/app/components/YourSection.tsx`):
+   - Create a new component following existing patterns (e.g., `Skills.tsx`, `Languages.tsx`)
+   - Wrap content in `<Section>` component for consistent spacing
+   - Add proper accessibility attributes
+
+4. **Update page layout** (`src/app/page.tsx`):
+   - Import your new component
+   - Add it wrapped in `<SectionErrorBoundary>` and `<Suspense>` tags
+   - Place it in the desired order within the CV
+
+5. **Update GraphQL schema** (`src/apollo/type-defs.ts`):
+   - Create ObjectType class for your new data structure using `@ObjectType()` decorator
+   - Add field to the `Me` class with `@Field()` decorator
+
+The layout automatically adjusts based on the data provided, and all sections are wrapped in error boundaries for graceful failure handling.
 
 ### GraphQL API
 The app exposes a GraphQL endpoint at `/graphql` that serves the resume data using Apollo Server with type-graphql decorators. This can be used to integrate the CV data with other applications or query it programmatically.
+
+**Architecture**:
+- **Type definitions** (`src/apollo/type-defs.ts`): ObjectType classes decorated with `@ObjectType()` and `@Field()`
+- **Resolvers** (`src/apollo/resolvers.ts`): Query resolver that converts React components to strings
+- **Type conversion** (`src/lib/types.ts`): `resumeDataToGraphQL()` function converts ResumeData (with React nodes) to GraphQL-compatible format (strings only)
+- **Route handler** (`src/app/graphql/route.ts`): Next.js Edge Runtime API route
 
 ### Error Handling
 The app includes error boundaries (`error-boundary.tsx` and `section-error-boundary.tsx`) to gracefully handle component failures without breaking the entire page.
